@@ -1,0 +1,21 @@
+Implement a Recursive Best-First Search (RBFS) to determine a solution for the 8-puzzle problem given an input initial state. The 8-puzzle should be a 3x3 puzzle.
+
+- The initial state of your program should be input from a text file with numbers in rows separated by a <tab> character. Each row of the input file should be terminated by a newline character.
+
+- The empty square should be represented by the number 0
+
+- Each move should be represented by one of the actions: up, down, left, or right to indicate which direct the empty tile moves. The result of an action will switch locations of the 0 tile with the tile in the direction of the move (i.e. if the empty tile moves up, the tile in that location will  move down to replace the old location of the 0 tile).
+
+- The Goal State should have the empty tile in the upper left corner of the puzzle, e.g.
+0	1	2
+3	4	5
+6	7	8
+
+When a solution is discovered, your program should display the sequence of moves to arrive at the goal state from the given initial state. For example:
+up
+left
+down
+down
+right
+up
+etc.
