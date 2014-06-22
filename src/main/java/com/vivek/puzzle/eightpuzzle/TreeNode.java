@@ -89,6 +89,9 @@ public class TreeNode implements Comparable<TreeNode>{
 	public int compareTo(TreeNode o) {
 		// TODO Auto-generated method stub
 		int cmp = getF() > o.getF() ? 1 : (getF() < o.getF()) ? -1 : 0;
+		if(cmp == 0) {
+			cmp = 1;
+		}
 		/*if(cmp == 0) {
 			int thisX = puzzleState.getZeroNode().getX(); 
 			int thatX = o.getPuzzleState().getZeroNode().getX();
