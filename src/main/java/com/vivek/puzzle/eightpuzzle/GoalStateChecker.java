@@ -4,14 +4,15 @@ import aima.core.search.framework.GoalTest;
 
 public class GoalStateChecker implements GoalTest {
 	
-	Object goalState; 
+	PuzzleState goalState; 
 	
 	GoalStateChecker(Object goalState) {
-		this.goalState = goalState;
+		this.goalState = (PuzzleState)goalState;
 	}
 	public boolean isGoalState(Object state) {
 		// TODO Auto-generated method stub
-		if(state.equals(goalState))
+		PuzzleState thisState = (PuzzleState) state;
+		if(thisState.equals(goalState))
 			return true;
 		else
 			return false;

@@ -1,15 +1,15 @@
 package com.vivek.puzzle.eightpuzzle;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import aima.core.agent.State;
 
-public class PuzzleState implements State {
+public class PuzzleState implements State, Cloneable {
 	Node currentPuzzleBoard[][]; // Current Puzzle Board
 	Node zeroNode; // Position of the blank square
-	int g_value;
-	int h_value;
-	int f_value;
+	Node sortedValues[];
+	
 	
 	/*
 	 * TODO: If necessary change the hashCode() and equals() based on f,g,h values
@@ -26,14 +26,29 @@ public class PuzzleState implements State {
 	Node getZeroNode() {
 		return zeroNode; 
 	}
+	
+	
+	void setSortedValues(Node[] sortedValues) {
+		this.sortedValues = sortedValues;
+	}
+	
+	Node getNodeWithValue(int val) {
+		if(val < sortedValues.length) {
+			return sortedValues[val];
+		}
+		return null;
+	}
+	
+	
+	Node[] getSortedValues() {
+		return sortedValues;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + Arrays.hashCode(currentPuzzleBoard);
-		result = prime * result
-				+ ((zeroNode == null) ? 0 : zeroNode.hashCode());
 		return result;
 	}
 
@@ -48,12 +63,42 @@ public class PuzzleState implements State {
 		PuzzleState other = (PuzzleState) obj;
 		if (!Arrays.deepEquals(currentPuzzleBoard, other.currentPuzzleBoard))
 			return false;
-		if (zeroNode == null) {
-			if (other.zeroNode != null)
-				return false;
-		} else if (!zeroNode.equals(other.zeroNode))
-			return false;
 		return true;
 	}
+	
+	public String toString() {
+		
+		StringBuffer output = new StringBuffer();
+		for(int i=0; i<currentPuzzleBoard.length; i++) {
+			for(int j=0; j< currentPuzzleBoard[i].length; j++) {
+				output.append(currentPuzzleBoard[i][j]);
+				output.append("\t");
+			}
+			output.append("\n");
+		}
+		return output.toString();
+	}
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		PuzzleState clonedObject = (PuzzleState)super.clone();
+		Node[][] tempPuzzleBoard = new Node[currentPuzzleBoard.length][currentPuzzleBoard[0].length];
+		for(int i=0;i<currentPuzzleBoard.length;i++) {
+			for(int j=0;j<currentPuzzleBoard[i].length;j++) {
+				tempPuzzleBoard[i][j] = (Node) currentPuzzleBoard[i][j].clone();
+			}
+		}
+		clonedObject.currentPuzzleBoard = tempPuzzleBoard;
+		clonedObject.zeroNode = (Node)zeroNode.clone();
+		
+		Node[] tempSortedValues = new Node[sortedValues.length];
+		for(int i=0;i<sortedValues.length;i++)
+			tempSortedValues[i] = (Node) sortedValues[i].clone();
+		clonedObject.sortedValues = tempSortedValues;
+		return clonedObject;
+	}
+
+	
 	
 }

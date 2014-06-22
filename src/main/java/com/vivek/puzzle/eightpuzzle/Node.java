@@ -1,6 +1,6 @@
 package com.vivek.puzzle.eightpuzzle;
 
-public class Node {
+public class Node implements Cloneable{
 	int x;
 	int y;
 	int value;
@@ -62,5 +62,15 @@ public class Node {
 	
 	public String toString() {
 		return Integer.toString(value);
+	}
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		Node clonedObject = (Node)super.clone();
+		clonedObject.x = x;
+		clonedObject.y = y;
+		clonedObject.value = value;
+		return clonedObject;
 	}
 }
