@@ -1,9 +1,14 @@
 package com.vivek.puzzle.eightpuzzle;
 
+/**
+ * Node corresponds to a tile in the Puzzle Board
+ * @author Vivek Venkatesh Ganesan
+ *
+ */
 public class Node implements Cloneable{
-	int x;
-	int y;
-	int value;
+	int x; // x coordinate for the tile
+	int y; // y coordinate for the tile
+	int value; // value of the tile
 	
 	Node(int x, int y, int value) {
 		// Position of this Node in the Eight Puzzle Board

@@ -2,6 +2,11 @@ package com.vivek.puzzle.eightpuzzle;
 
 import aima.core.agent.Action;
 
+/**
+ * Class that Implements the Action interface (aima.core.agent.Action)
+ * @author Vivek Venkatesh Ganesan
+ *
+ */
 public class PuzzleAction implements Action{
 	
 	Moves moveToMake;

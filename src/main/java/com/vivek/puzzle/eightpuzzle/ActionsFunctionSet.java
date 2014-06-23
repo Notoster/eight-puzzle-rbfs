@@ -6,10 +6,24 @@ import java.util.Set;
 import aima.core.agent.Action;
 import aima.core.search.framework.ActionsFunction;
 
+/**
+ * Find out the possible actions for a given Puzzle State
+ * @author Vivek Venkatesh Ganesan
+ *
+ */
 public class ActionsFunctionSet implements ActionsFunction {
-
+	
+	/**
+	 * Returns Set of Actions Possible for the given State s 
+	 * @param Given State of the Puzzle
+	 * 
+	 */
 	public Set<Action> actions(Object s) {
-		// Returns Set of Actions Possible for the given State s 
+		
+		// There are four possible actions that the blank tile can take:
+		// UP, DOWN, LEFT, RIGHT
+		// The possible actions might be limited if the blank tile is in the corners
+		
 		PuzzleState puzzleState = (PuzzleState) s;
 		Node zeroNode = puzzleState.getZeroNode();
 		Set<Action> possibleActions = new HashSet<Action>();

@@ -1,19 +1,19 @@
 package com.vivek.puzzle.eightpuzzle;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-
 import aima.core.agent.State;
 
+/**
+ * Class that maintains the State of the Puzzle
+ * Implements the State interface (aima.core.agent.State)
+ * @author Vivek Venkatesh Ganesan
+ *
+ */
 public class PuzzleState implements State, Cloneable {
 	Node currentPuzzleBoard[][]; // Current Puzzle Board
 	Node zeroNode; // Position of the blank square
-	Node sortedValues[];
+	Node sortedValues[]; // Linear representation of the Puzzle Board
 	
-	
-	/*
-	 * TODO: If necessary change the hashCode() and equals() based on f,g,h values
-	 */
 	PuzzleState(Node currentPuzzleBoard[][], Node zeroNode) {
 		this.currentPuzzleBoard = currentPuzzleBoard;
 		this.zeroNode = zeroNode;
@@ -44,11 +44,13 @@ public class PuzzleState implements State, Cloneable {
 		return sortedValues;
 	}
 
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + Arrays.hashCode(currentPuzzleBoard);
+		result = prime * result + Arrays.hashCode(sortedValues);
 		return result;
 	}
 
@@ -61,11 +63,11 @@ public class PuzzleState implements State, Cloneable {
 		if (getClass() != obj.getClass())
 			return false;
 		PuzzleState other = (PuzzleState) obj;
-		if (!Arrays.deepEquals(currentPuzzleBoard, other.currentPuzzleBoard))
+		if (!Arrays.equals(sortedValues, other.sortedValues))
 			return false;
 		return true;
 	}
-	
+
 	public String toString() {
 		
 		StringBuffer output = new StringBuffer();

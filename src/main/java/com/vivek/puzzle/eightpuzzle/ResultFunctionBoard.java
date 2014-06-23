@@ -1,19 +1,27 @@
 package com.vivek.puzzle.eightpuzzle;
 
-import java.util.ArrayList;
-
 import aima.core.agent.Action;
 import aima.core.search.framework.ResultFunction;
 
+/**
+ * Result Function generates the next possible state for a given state and a given action
+ * @author Vivek Venkatesh Ganesan
+ *
+ */
 public class ResultFunctionBoard implements ResultFunction {
-
+	
+	/**
+	 * Returns the new state of s after applying action a
+	 * @param s Given Puzzle State
+	 * @param a Action that needs to be applied on the Given PuzzleState
+	 */
 	public Object result(Object s, Action a) {
-		// Returns the new state of s after applying action a
-		// Add to movesMade here
-		// Increment the g_value when you add it
 		PuzzleState puzzleState = (PuzzleState) s;
-		
 		PuzzleAction puzzleAction =(PuzzleAction) a;
+		
+		
+		// Swap the blank tile with the adjacent tile in the direction of the movement
+		// The action to be taken comes from the ActionFunctionSet
 		
 		if(puzzleAction.getAction() == Moves.UP) {
 			Node zeroNode = puzzleState.getZeroNode();
@@ -35,11 +43,7 @@ public class ResultFunctionBoard implements ResultFunction {
 			sortedValues[0] = zeroNode;
 			PuzzleState newState = new PuzzleState(puzzleBoard, zeroNode); 
 			newState.setSortedValues(sortedValues);
-			/*ArrayList<Moves> movesMadeSoFar = puzzleState.getMovesMade();
-			newState.setMovesMode(movesMadeSoFar);*/
-			////newState.addToMovesMade(Moves.UP);
-			////newState.setGValue(puzzleState.getGValue() + 1);
-			///newState.setGValue(newState.getNumberOfMoves());
+			
 			return newState;
 		}
 		else if(puzzleAction.getAction() == Moves.DOWN) {
@@ -62,11 +66,7 @@ public class ResultFunctionBoard implements ResultFunction {
 			sortedValues[0] = zeroNode;
 			PuzzleState newState = new PuzzleState(puzzleBoard, zeroNode); 
 			newState.setSortedValues(sortedValues);
-			/*ArrayList<Moves> movesMadeSoFar = puzzleState.getMovesMade();
-			newState.setMovesMode(movesMadeSoFar);*/
-			////newState.addToMovesMade(Moves.DOWN);
-			////newState.setGValue(puzzleState.getGValue() + 1);
-			///newState.setGValue(newState.getNumberOfMoves());
+			
 			return newState;
 		}
 		else if(puzzleAction.getAction() == Moves.LEFT) {
@@ -89,11 +89,7 @@ public class ResultFunctionBoard implements ResultFunction {
 			sortedValues[0] = zeroNode;
 			PuzzleState newState = new PuzzleState(puzzleBoard, zeroNode); 
 			newState.setSortedValues(sortedValues);
-			/*ArrayList<Moves> movesMadeSoFar = puzzleState.getMovesMade();
-			newState.setMovesMode(movesMadeSoFar);*/
-			////newState.addToMovesMade(Moves.LEFT);
-			////newState.setGValue(puzzleState.getGValue() + 1);
-			///newState.setGValue(newState.getNumberOfMoves());
+			
 			return newState;
 		}
 		else if(puzzleAction.getAction() == Moves.RIGHT){
@@ -116,11 +112,7 @@ public class ResultFunctionBoard implements ResultFunction {
 			sortedValues[0] = zeroNode;
 			PuzzleState newState = new PuzzleState(puzzleBoard, zeroNode); 
 			newState.setSortedValues(sortedValues);
-			/*ArrayList<Moves> movesMadeSoFar = puzzleState.getMovesMade();
-			newState.setMovesMode(movesMadeSoFar);*/
-			////newState.addToMovesMade(Moves.RIGHT);
-			////newState.setGValue(puzzleState.getGValue() + 1);
-			///newState.setGValue(newState.getNumberOfMoves());
+			
 			return newState;
 		}
 		return puzzleState;
