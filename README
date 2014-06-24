@@ -1,3 +1,64 @@
+README
+======
+The code has been implemented in Java. Attached file contains the source, dependency jars, executable jar for this assignment etc.  
+
+Execution
+=========
+
+There are three possible ways to run the submitted JAR file:
+
+a) java -jar <path_to_input_file_containing_the_initial_state>
+
+If only the initial state file is given as the input, it will by default consider the following goal state:
+
+0	1	2
+3	4	5
+6	7	8
+
+b) java -jar <path_to_input_file_containing_the_initial_state> <path_to_input_file_containing_the_goal_state>
+
+Here we get both initial state and goal state as input from files. We can use this if the goal state is something different from the above default state.
+
+c) java -jar <path_to_input_file_containing_the_initial_state> <path_to_input_file_containing_the_goal_state> <board_size>
+
+where board size specifies the dimensions of the board. (Example: 3 means it is a 3 X 3 board) 
+
+OTHER CONSIDERATIONS
+====================
+If the depth reaches 500 or more the program will exit.
+
+
+SAMPLE INPUT AND INPUT
+=====================
+
+> java -jar eightpuzzle.jar input.txt
+
+Initial State
+-------------
+3	2	5	
+4	1	8	
+6	7	0	
+
+Goal State
+-----------
+0	1	2	
+3	4	5	
+6	7	8	
+
+Number of Steps to reach the solution = 6
+
+Steps
+-----
+UP
+UP
+LEFT
+DOWN
+LEFT
+UP
+
+
+QUESTION
+========
 Implement a Recursive Best-First Search (RBFS) to determine a solution for the 8-puzzle problem given an input initial state. The 8-puzzle should be a 3x3 puzzle.
 
 - The initial state of your program should be input from a text file with numbers in rows separated by a <tab> character. Each row of the input file should be terminated by a newline character.
