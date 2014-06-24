@@ -18,8 +18,6 @@ public class TreeNode implements Comparable<TreeNode>{
 	int f; 
 	int alternateH;
 	int alternateF;
-	int thirdH;
-	int thirdF;
 	
 	TreeNode() {
 		puzzleState = null;
@@ -86,22 +84,6 @@ public class TreeNode implements Comparable<TreeNode>{
 		this.alternateF = alternateF;
 	}
 
-	protected int getThirdH() {
-		return thirdH;
-	}
-
-	protected int getThirdF() {
-		return thirdF;
-	}
-
-	protected void setThirdH(int thirdH) {
-		this.thirdH = thirdH;
-	}
-
-	protected void setThirdF(int thirdF) {
-		this.thirdF = thirdF;
-	}
-
 	protected void addChild(TreeNode node) {
 		children.add(node);
 	}
@@ -111,14 +93,13 @@ public class TreeNode implements Comparable<TreeNode>{
 		
 		if(cmp == 0) {
 			// Breaking Ties in F Value
-			// Resolve Ties using alternate Heuristics
+			// Resolve Ties using alternate Heuristics & depth, position
 			
 			cmp = getAlternateF() > o.getAlternateF() ? 1 : (getAlternateF() < o.getAlternateF()) ? -1 : 0;
 			
 			if(cmp == 0) {
-				cmp = getThirdF() > o.getThirdF() ? 1: (getThirdF() < o.getThirdF()) ? -1 : 0;
+				cmp = getDepth() > o.getDepth() ? 1: (getDepth() < o.getDepth()) ? -1 : 0;
 			}
-			
 			if(cmp == 0) {
 				
 				int thisX = puzzleState.getZeroNode().getX(); 
