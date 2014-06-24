@@ -180,6 +180,22 @@ public class EightPuzzle extends SimpleProblemSolvingAgent
 		
 		
 	}
+	protected PuzzleState getInitialPuzzleState() {
+		return initialPuzzleState;
+	}
+
+	protected PuzzleState getGoalPuzzleState() {
+		return goalPuzzleState;
+	}
+
+	protected void setInitialPuzzleState(PuzzleState initialPuzzleState) {
+		this.initialPuzzleState = initialPuzzleState;
+	}
+
+	protected void setGoalPuzzleState(PuzzleState goalPuzzleState) {
+		this.goalPuzzleState = goalPuzzleState;
+	}
+
 	public static void main( String[] args )
     {
 		EightPuzzle eightPuzzle = null;
@@ -205,7 +221,15 @@ public class EightPuzzle extends SimpleProblemSolvingAgent
 		if(eightPuzzle != null) {
 			Problem eightPuzzleProblem = eightPuzzle.formulateProblem(eightPuzzle.formulateGoal());
 			List<Action> solution = eightPuzzle.search(eightPuzzleProblem);
-			System.out.println("Number of Steps = " + solution.size());
+			System.out.println("Initial State");
+			System.out.println("-------------");
+			System.out.println(eightPuzzle.getInitialPuzzleState());
+			System.out.println("Goal State");
+			System.out.println("-----------");
+			System.out.println(eightPuzzle.getGoalPuzzleState());
+			System.out.println("Number of Steps to reach the solution = " + solution.size() + "\n");
+			System.out.println("Steps");
+			System.out.println("-----");
 			for(Action action: solution) {
 				System.out.println(action);
 			}
