@@ -38,7 +38,34 @@ public class EightPuzzle extends SimpleProblemSolvingAgent
 	}
 	
 	/**
-	 * Helper Function to read contents from the fiel
+	 * If no goal input file is specified, a default goal state on a 3 X 3 board will be used
+	 * @param pathToInputFile Input file contains the initial state of the puzzle
+	 */
+	EightPuzzle(String pathToInputFile) {
+		int boardSize = 3;
+		initialPuzzleState = readFromFile(pathToInputFile, boardSize);
+		Node puzzleBoard[][] = new Node[boardSize][boardSize];
+		Node sortedValues[] = new Node[boardSize * boardSize];
+		Node zeroNode = null;
+		int defaultGoalPuzzle[][] = {{0,1,2},{3,4,5},{6,7,8}};
+		for(int i=0;i<defaultGoalPuzzle.length;i++) {
+			for(int j=0;j<defaultGoalPuzzle[i].length;j++) {
+				int thisValue = defaultGoalPuzzle[i][j];
+				Node thisNode = new Node(i, j, thisValue);
+				puzzleBoard[i][j] = thisNode;
+				if(thisValue == 0) {
+					zeroNode = thisNode;
+				}
+				if(thisValue < boardSize * boardSize)
+					sortedValues[thisValue] = thisNode;
+			}
+		}
+		goalPuzzleState = new PuzzleState(puzzleBoard, zeroNode);
+		goalPuzzleState.setSortedValues(sortedValues);
+	}
+	
+	/**
+	 * Helper Function to read contents from the file
 	 * @param pathToFile Path of the file to be read
 	 * @param boardSize Dimension of the board
 	 * @return
@@ -92,6 +119,7 @@ public class EightPuzzle extends SimpleProblemSolvingAgent
 		else {
 			System.err.println("The input file does not exist");
 			puzzleState = null;
+			System.exit(0);
 		}
 		puzzleState = new PuzzleState(puzzleBoard, zeroNode);
 		puzzleState.setSortedValues(sortedValues);
@@ -154,12 +182,36 @@ public class EightPuzzle extends SimpleProblemSolvingAgent
 	}
 	public static void main( String[] args )
     {
-        EightPuzzle eightPuzzle = new EightPuzzle("src/main/java/com/vivek/puzzle/eightpuzzle/input.txt","src/main/java/com/vivek/puzzle/eightpuzzle/goal.txt", 3);
-        Problem eightPuzzleProblem = eightPuzzle.formulateProblem(eightPuzzle.formulateGoal());
-        List<Action> solution = eightPuzzle.search(eightPuzzleProblem);
-        System.out.println("Number of Steps = " + solution.size());
-        for(Action action: solution) {
-        	System.out.println(action);
-        }
+		EightPuzzle eightPuzzle = null;
+		if(args.length == 1) {
+			eightPuzzle = new EightPuzzle(args[0]);
+		}
+		else if(args.length == 2) {
+			eightPuzzle = new EightPuzzle(args[0], args[1], 3);
+		}
+		else if(args.length == 3) {
+			if(args[2].matches("\\d+")) {
+				eightPuzzle = new EightPuzzle(args[0], args[1], Integer.parseInt(args[2]));
+			}
+			else {
+				eightPuzzle = new EightPuzzle(args[0], args[1], 3);
+			}
+		}
+		else {
+			System.err.println("Invalid number of arguments");
+		}
+        //EightPuzzle eightPuzzle = new EightPuzzle("src/main/java/com/vivek/puzzle/eightpuzzle/input.txt","src/main/java/com/vivek/puzzle/eightpuzzle/goal.txt", 3);
+        //EightPuzzle eightPuzzle = new EightPuzzle("src/main/java/com/vivek/puzzle/eightpuzzle/input.txt");
+		if(eightPuzzle != null) {
+			Problem eightPuzzleProblem = eightPuzzle.formulateProblem(eightPuzzle.formulateGoal());
+			List<Action> solution = eightPuzzle.search(eightPuzzleProblem);
+			System.out.println("Number of Steps = " + solution.size());
+			for(Action action: solution) {
+				System.out.println(action);
+			}
+		}
+		else {
+			System.err.print("Please check the arguments passed");
+		}
     }
 }
